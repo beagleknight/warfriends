@@ -17,10 +17,10 @@ function game:init(engine)
 
   -- Load players
   local p1 = Player:new()
-  p1:loadArmy("lm_army")
+  p1:loadArmy("armies/lizardmen/test")
   table.insert(self.players,p1)
   local p2 = Player:new()
-  p2:loadArmy("dw_army")
+  p2:loadArmy("armies/dwarfs/test")
   table.insert(self.players,p2)
 
   -- End initialization
@@ -31,8 +31,8 @@ function game:update(dt)
 end
 
 function game:draw()
-  self.players[1]:drawArmy(self.engine)
-  self.players[2]:drawArmy(self.engine)
+  self.players[1]:drawArmy()
+  self.players[2]:drawArmy()
 end
 
 function game:mousepressed(x,y,button)
