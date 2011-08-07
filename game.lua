@@ -2,10 +2,13 @@
   Module Game
 ]]
 
+local Player = require 'player'
+
 local game = {
   engine = {},
   status = 'unitialized',
   players = {},
+  turn = 1
 }
 
 function game:init(engine) 
@@ -13,11 +16,14 @@ function game:init(engine)
   self.engine = engine
 
   -- Load players
-  local p1 = require 'player'
-  local p2 = require 'player'
+  local p1 = Player:new()
+  p1:loadArmy("lm_army")
   table.insert(self.players,p1)
+  local p2 = Player:new()
+  p2:loadArmy("dw_army")
   table.insert(self.players,p2)
 
+  -- End initialization
   self.status = 'initialized'
 end
 
@@ -25,7 +31,8 @@ function game:update(dt)
 end
 
 function game:draw()
-  self.engine.graphics.circle("fill", 300, 300, 50)
+  self.players[1]:drawArmy(self.engine)
+  self.players[2]:drawArmy(self.engine)
 end
 
 function game:mousepressed(x,y,button)
